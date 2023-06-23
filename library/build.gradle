@@ -10,6 +10,7 @@ buildscript {
 apply plugin: 'com.android.library'
 apply plugin: 'idea'
 apply plugin: 'bintray-release'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 23
@@ -46,4 +47,18 @@ publish {
     publishVersion = android.defaultConfig.versionName
     description = 'Cache support for android VideoView'
     website = 'https://github.com/danikula/AndroidVideoCache'
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.telekom.onapp.commons'
+            artifactId = 'videoPlayerCache'
+            version = '1.0.0'
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
 }
